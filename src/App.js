@@ -19,28 +19,20 @@ import {Button} from 'react-bootstrap'
 
 class AppRaw extends Component {
   render() {
-
-    let props = this.props
     let {actions} = this.props
-
-    actions.goodsAddPrice(1, 2)
-
     let doSomething = () => {
-      let result = actions.goodsSuccess({payload: true})
+      // actions.goodsSuccess({payload: 'foobar'})
       // actions.goodsFailure({error: true})
-      // let result = actions.goodsAddPrice(1, 4)
-      console.log(result,props)
+      actions.goodsAddPrice(1, 4)
     }
 
     return (      
         <Router>
           <Layout>
             <div>            
-              <Route exact path="/">
-                <Home doSomething={doSomething}/>
-              </Route>
-              <Route path="/about" component={About}/>
-              <Route path="/topics" component={Topics}/>
+              <Route exact path="/" render={() => <Home doSomething={doSomething}/>}/>
+              <Route path="/about" render={About}/>
+              <Route path="/topics" render={Topics}/>
             </div>
           </Layout>
         </Router>
@@ -60,7 +52,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators({
-    ...DemoActions
+    ...DemoActions,
   }, dispatch)
 })
 
