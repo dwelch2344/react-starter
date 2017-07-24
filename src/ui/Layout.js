@@ -5,14 +5,33 @@ import React, { Component } from 'react';
 import { LinkContainer } from 'react-router-bootstrap'
 
 import 'bootstrap/dist/css/bootstrap.min.css'
+import Avatar from '../image/avatar.png'
 
-import {Nav, NavItem, Navbar, NavDropdown, MenuItem} from 'react-bootstrap'
+import {Nav, NavItem, Navbar, NavDropdown, MenuItem, Image} from 'react-bootstrap'
+import Drawer from 'react-motion-drawer';
+
+
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import { DrawerActions, DrawerSelectors } from '../redux/drawer/Drawer'
 
 class LayoutRaw extends Component {
+
   render() {
+    let onChange = arg1 => {
+      if( arg1 === false ){
+        this.setState({...this.state, drawerOpen: false})
+      }
+    }
+    
     return (
       <div>
-        <Navigation/>
+        <Drawer right={true} 
+            className="action-drawer"
+            open={this.props.drawerOpen} onChange={onChange}>
+          <p>Give the user their options here. Because dropdowns are so uncool </p>
+        </Drawer>
+        <Navigation actions={this.props.actions}/>
         <div className="container">
           {this.props.children}  
         </div>        
@@ -24,7 +43,7 @@ class LayoutRaw extends Component {
 class Navigation extends Component {
   render() {
     return (
-      <Navbar inverse collapseOnSelect>
+      <Navbar inverse collapseOnSelect style={{borderRadius: 0}}>
         <Navbar.Header>
           <Navbar.Brand>
             <a href=""> Starter App </a>
@@ -52,7 +71,9 @@ class Navigation extends Component {
           </Nav>
           <Nav pullRight>
             {/* <Navbar.Text>Text Right</Navbar.Text> */}
-            <NavItem eventKey={1} href="#">Link Right</NavItem>
+            <NavItem eventKey={1} href="#" onClick={ e => this.props.actions.drawerOpen()}>
+              <Image src={Avatar} width={25} circle style={{marginRight: 5}}/> John Anderson
+            </NavItem>
           </Nav>
         </Navbar.Collapse>
       </Navbar>
@@ -60,4 +81,15 @@ class Navigation extends Component {
   }
 }
 
-export default LayoutRaw
+
+const mapStateToProps = state => ({
+  drawerOpen: DrawerSelectors.open(state)
+})
+
+const mapDispatchToProps = dispatch => ({
+  actions: bindActionCreators({
+    ...DrawerActions,
+  }, dispatch)
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(LayoutRaw)

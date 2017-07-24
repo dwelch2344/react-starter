@@ -7,7 +7,7 @@ import { Provider } from 'react-redux';
 
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import {DemoActions} from './redux/demo/Demo'
+import { DemoActions } from './redux/demo/Demo'
 
 import {
   BrowserRouter as Router,

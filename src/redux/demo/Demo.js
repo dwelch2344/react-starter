@@ -5,7 +5,6 @@ const { Types, Creators } = createActions({
   goodsSuccess: ['payload'],
   goodsFailure: ['error'],
   goodsAddPrice: (a, b) => {
-    console.log('test')
     return ({ type: Types.GOODS_ADD_PRICE, total: a + b })
   }
 }, {}) 
@@ -22,7 +21,7 @@ const failure = (state = INITIAL_STATE, action) =>
   ({ ...state, error: true, goodies: null })
 
 const goodsAddPrice = (state, action) => {
-  debugger;
+  console.log('Goods Add Price triggered')
   return state
 }
 
