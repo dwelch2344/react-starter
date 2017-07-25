@@ -16,10 +16,11 @@ It's had a number of libraries, tools and configurations added, including:
 # Running behind a reverse proxy? 
 
 We typically run our services behind a single reverse proxy (usually behind the beloved Kubernetes). 
-To get this setup working cleanly, two changes are required:
+To get this setup working cleanly, 2 changes are required (assuming your reverse proxy is listening on http://localhost:8080) :
   1. Add the following to `package.json` 
   ``` 
     "homepage": "/somePrefix/",
+    "proxy": "http://localhost:8080",
   ```
   2. And configure the `BrowserRouter` instance in `App.js`:
   ```
