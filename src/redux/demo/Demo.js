@@ -1,7 +1,7 @@
 // sampleReducer.js
 import { createReducer, createActions } from 'reduxsauce'
 
-const { Types, Creators } = createActions({
+export const { Types, Creators } = createActions({
   goodsSuccess: ['payload'],
   goodsFailure: ['error'],
   goodsAddPrice: (a, b) => {
@@ -14,12 +14,15 @@ export const INITIAL_STATE = {
   error: false, goodies: null 
 }
 
-const success = (state = INITIAL_STATE, action) => 
-  ({ ...state, error: false, goodies: action.goodies })
-
-const failure = (state = INITIAL_STATE, action) => 
-  ({ ...state, error: true, goodies: null })
-
+const success = (state = INITIAL_STATE, action) => {
+  console.log('Success', action)
+  return ({ ...state, error: false, goodies: action.goodies })
+}
+const failure = (state = INITIAL_STATE, action) => {
+  console.log('Error', action)
+  return ({ ...state, error: true, goodies: null })
+}
+  
 const goodsAddPrice = (state, action) => {
   console.log('Goods Add Price triggered')
   return state

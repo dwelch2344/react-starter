@@ -2,6 +2,7 @@
 
 import React, { Component } from 'react';
 
+import { withRouter } from 'react-router-dom'
 import { LinkContainer } from 'react-router-bootstrap'
 
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -18,9 +19,10 @@ import { DrawerActions, DrawerSelectors } from '../redux/drawer/Drawer'
 class LayoutRaw extends Component {
 
   render() {
+    let {drawerClose} = this.props.actions
     let onChange = arg1 => {
       if( arg1 === false ){
-        this.setState({...this.state, drawerOpen: false})
+        drawerClose()
       }
     }
     
@@ -92,4 +94,4 @@ const mapDispatchToProps = dispatch => ({
   }, dispatch)
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(LayoutRaw)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(LayoutRaw))

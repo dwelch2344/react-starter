@@ -11,7 +11,7 @@ import { DemoActions } from './redux/demo/Demo'
 
 import {
   BrowserRouter as Router,
-  Route
+  Route, Switch
 } from 'react-router-dom'
 import Layout from './ui/Layout'
 
@@ -29,10 +29,14 @@ class AppRaw extends Component {
     return (      
         <Router>
           <Layout>
-            <div>            
-              <Route exact path="/" render={() => <Home doSomething={doSomething}/>}/>
-              <Route path="/about" render={About}/>
-              <Route path="/topics" render={Topics}/>
+            <div> 
+              <Switch>              
+                <Route exact path="/" component={() => <Home doSomething={doSomething}/>}/>
+                <Route path="/about" component={About}/>
+                <Route path="/topics" component={Topics}/>              
+                <Route component={NotFound}/>
+              
+              </Switch>            
             </div>
           </Layout>
         </Router>
@@ -43,7 +47,7 @@ class AppRaw extends Component {
 const Home = props => <div> <h1>Home</h1> <Button onClick={e => props.doSomething()}> Do Something </Button> </div>
 const About = () => <h1>About</h1>
 const Topics = () => <h1>Topics</h1>
-
+const NotFound = ({match}) => <div><h1>Not Found!</h1> <p>Sorry, couldn't find anything under {JSON.stringify(match, null, 2)}</p> </div>
 
 
 const mapStateToProps = state => ({
