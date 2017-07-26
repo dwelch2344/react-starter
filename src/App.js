@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import './App.css';
+import './generated/scss/App.css';
 
 import store from './store'
 import { Provider } from 'react-redux';
@@ -31,11 +31,10 @@ class AppRaw extends Component {
           <Layout>
             <div> 
               <Switch>              
-                <Route exact path="/" component={() => <Home doSomething={doSomething}/>}/>
-                <Route path="/about" component={About}/>
+                <Route exact path="/" component={() => <Redirect to={{pathname:'/home'}}/>}/>
+                <Route exact path="/home" component={() => <Home doSomething={doSomething}/>}/>
                 <Route path="/topics" component={Topics}/>              
-                <Route component={NotFound}/>
-              
+                <Route component={NotFound}/>              
               </Switch>            
             </div>
           </Layout>
