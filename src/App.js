@@ -11,7 +11,7 @@ import { DemoActions } from './redux/demo/Demo'
 
 import {
   BrowserRouter as Router,
-  Route, Switch
+  Route, Switch, Redirect
 } from 'react-router-dom'
 import Layout from './ui/Layout'
 

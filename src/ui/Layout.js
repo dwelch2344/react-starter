@@ -16,9 +16,21 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { DrawerActions, DrawerSelectors } from '../redux/drawer/Drawer'
 
-class LayoutRaw extends Component {
+
+
+
+@withRouter
+@connect(state => ({
+  drawerOpen: DrawerSelectors.open(state)
+}), dispatch => ({
+  actions: bindActionCreators({
+    ...DrawerActions,
+  }, dispatch)
+}))
+export default class Layout extends Component {
 
   render() {
+
     let {drawerClose} = this.props.actions
     let onChange = arg1 => {
       if( arg1 === false ){
@@ -83,15 +95,3 @@ class Navigation extends Component {
   }
 }
 
-
-const mapStateToProps = state => ({
-  drawerOpen: DrawerSelectors.open(state)
-})
-
-const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators({
-    ...DrawerActions,
-  }, dispatch)
-})
-
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(LayoutRaw))
