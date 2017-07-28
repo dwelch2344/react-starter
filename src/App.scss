@@ -1,4 +1,29 @@
- body {
+
+
+@import url('https://fonts.googleapis.com/css?family=Hind');
+@import url('./ui/scss/Auth.css');
+
+.float-left{ float: left}
+.float-right{ float: right}
+.clear-fix { clear: both}
+.margin-none{ margin: 0 !important}
+.padding-none{ padding: 0 !important}
+.border-squared{ border-radius: 0 !important}
+.display-block{ display: block !important}
+
+.align-right, .text-right{ text-align: right}
+.align-center, .text-center{ text-align: center}
+
+strong{ font-weight: bold}
+
+a:hover{
+  cursor: pointer;
+  text-decoration: none;
+}
+
+
+
+body {
   overflow: hidden;
 }
 
